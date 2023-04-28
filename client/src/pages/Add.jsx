@@ -34,7 +34,7 @@ const Add = () => {
         formData.append(value, values[value])
       }
       const res = await axios.post("http://localhost:3000/equipment", formData)
-      console.log(res.data)
+      navigate('/')
     },
   });
 
