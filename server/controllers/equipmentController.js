@@ -14,7 +14,7 @@ const addEquipment = async (req, res) => {
         description: req.body.description,
         stock: req.body.stock,
         category: req.body.category,
-        isAvailable: req.body.isAvailable
+        status: req.body.status
     }
     await Equipment.create(equipment)
     res.json(equipment)

@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        isAvailable: {
+        status: {
             type: DataTypes.TINYINT(1),
             allowNullable: false
         },
