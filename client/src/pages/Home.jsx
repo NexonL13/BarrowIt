@@ -6,7 +6,7 @@ import { MdAddCircleOutline } from 'react-icons/md'
 
 const Home = () => {
   const [listOfEquipment, setListOfEquipment] = useState([]);
-  const url_path = "http://localhost:5173/public/images/"
+  const url_path = "http://localhost:5173/images/"
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -18,9 +18,6 @@ const Home = () => {
     fetchAllEquipment();
   }, []);
 
-  const handleClick = () => {
-    navigate('/add')
-  }
 
   return (
     <>
@@ -37,7 +34,7 @@ const Home = () => {
               <th>Equipment Name</th>
               <th>Description</th>
               <th>Stocks</th>
-              <th className="flex justify-center align-middle"><button className="text-3xl" onClick={handleClick}><MdAddCircleOutline className="text-3xl"/></button></th>
+              <th className="flex justify-center align-middle"><button className="text-3xl" onClick={() => navigate('add')}><MdAddCircleOutline className="text-3xl"/></button></th>
             </tr>
           </thead>
           {listOfEquipment.map((item) => (
@@ -52,7 +49,7 @@ const Home = () => {
                 <td>
                   <div className="flex items-center space-x-3">
                     <div className="avatar">
-                      <div className="mask mask-squircle w-12 h-12">
+                      <div className="w-12 h-12 mask mask-squircle">
                         <img
                           src={`${url_path + item.image}`}
                           alt="Avatar Tailwind CSS Component"
@@ -64,11 +61,11 @@ const Home = () => {
                       {
                       item.status 
                       ? 
-                      <div className="text-sm opacity-50 text-green-900 font-bold">
+                      <div className="text-sm font-bold text-green-900 opacity-50">
                         Available
                       </div>
                       :
-                      <div className="text-sm opacity-50 text-red-900 font-bold">
+                      <div className="text-sm font-bold text-red-900 opacity-50">
                       Out of Stock
                       </div>
                       }
@@ -84,7 +81,7 @@ const Home = () => {
                 </td>
                 <td>{item.stock}</td>
                 <th>
-                  <button className="btn btn-ghost btn-xs" onClick={handleClick}>details</button>
+                  <button className="btn btn-ghost btn-xs">details</button>
                 </th>
               </tr>
           </tbody>

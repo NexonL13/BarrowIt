@@ -1,11 +1,11 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import FormikControl from "./FormikControl";
 import TextError from "./TextError";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { IoIosArrowBack } from "react-icons/io"
+import { IoIosArrowBack } from "react-icons/io";
 
 const FormikContainer = () => {
   const navigate = useNavigate();
@@ -58,77 +58,84 @@ const FormikContainer = () => {
       validateOnChange={false}
     >
       {(formik) => (
-        <Form>
-          <div className="p-20 my-32 max-w-3xl mx-auto space-y-2 bg-gray-100">
-          <div className="flex space-x-72">
-            <h1 className="text-3xl font-semibold">Add the equipment</h1>
-            <button type="button" onClick={() => navigate('/')}><IoIosArrowBack className="text-3xl"/></button>
-          </div>
-          <div>
-          <label className="block">Image Upload</label>
-          <Field name="image">
-            {(props) => {
-              const { field } = props;
-              return (
-                <input
-                  type="file"
-                  id="image"
-                  name="image"
-                  accept="image/*"
-                  onChange={(e) =>
-                    formik.setFieldValue("image", e.target.files[0])
-                  }
-                  className="file-input file-input-bordered rounded w-full"
+        <Form className="flex items-center justify-center h-screen">
+          <div className="p-20 bg-gray-100">
+            <div className="flex space-x-72">
+              <h1 className="text-3xl font-semibold">Add the equipment</h1>
+              <button type="button" onClick={() => navigate("/")}>
+                <IoIosArrowBack className="text-3xl" />
+              </button>
+            </div>
+            <div>
+              <label className="block">Image Upload</label>
+              <Field name="image">
+                {(props) => {
+                  const { field } = props;
+                  return (
+                    <input
+                      type="file"
+                      id="image"
+                      name="image"
+                      accept="image/*"
+                      onChange={(e) =>
+                        formik.setFieldValue("image", e.target.files[0])
+                      }
+                      className="w-full rounded file-input file-input-bordered"
+                    />
+                  );
+                }}
+              </Field>
+              <ErrorMessage name="image" component={TextError} />
+            </div>
+            <FormikControl
+              control="input"
+              type="text"
+              label="Name"
+              name="name"
+              placeholder="Equipment Name"
+              className="block w-full px-4 py-2 border-gray-400 rounded input input-bordered focus:outline-none focus:border-teal-500"
+            />
+            <FormikControl
+              control="textarea"
+              type="text"
+              label="Description"
+              name="description"
+              placeholder="Description..."
+              className="block w-full px-4 py-2 border-gray-400 rounded input input-bordered focus:outline-none focus:border-teal-500"
+            />
+            <div className="flex space-x-4">
+              <div className="w-1/2">
+                <FormikControl
+                  control="input"
+                  type="number"
+                  label="Stocks"
+                  name="stock"
+                  placeholder="Stock(s)"
+                  className="block w-full px-4 py-2 border-gray-400 rounded input input-bordered focus:outline-none focus:border-teal-500"
                 />
-              );
-            }}
-          </Field>
-          <ErrorMessage name="image" component={TextError} />
-          </div>
-          <FormikControl
-            control="input"
-            type="text"
-            label="Name"
-            name="name"
-            placeholder="Equipment Name"
-            className="input input-bordered border-gray-400 block py-2 px-4 w-full rounded focus:outline-none focus:border-teal-500"
-          />
-          <FormikControl
-            control="textarea"
-            type="text"
-            label="Description"
-            name="description"
-            placeholder="Description..."
-            className="input input-bordered border-gray-400 block py-2 px-4 w-full rounded focus:outline-none focus:border-teal-500"
-          />
-          <div className="flex space-x-4">
-          <div className="w-1/2">
-          <FormikControl
-            control="input"
-            type="number"
-            label="Stocks"
-            name="stock"
-            placeholder="Stock(s)"
-            className="input input-bordered border-gray-400 block py-2 px-4 w-full rounded focus:outline-none focus:border-teal-500"
-          />
-          </div>
-          <div className="w-1/2">
-          <FormikControl
-            control="select"
-            label="Category"
-            name="category"
-            options={dropdownOptions}
-            className="input input-bordered border-gray-400 block py-2 px-4 w-full rounded focus:outline-none focus:border-teal-500"
-          />
-          </div>
-          </div>      
-          <FormikControl
-            control="radio"
-            label="Status"
-            name="status"
-            options={radioOptions}
-          />
-          <button type="submit" className="flex items-center btn w-full mx-auto">Submit</button>
+              </div>
+              <div className="w-1/2">
+                <FormikControl
+                  control="select"
+                  label="Category"
+                  name="category"
+                  options={dropdownOptions}
+                  className="block w-full px-4 py-2 border-gray-400 rounded input input-bordered focus:outline-none focus:border-teal-500"
+                />
+              </div>
+            </div>
+            <FormikControl
+              control="radio"
+              label="Status"
+              name="status"
+              options={radioOptions}
+            />
+            <button
+              type="submit"
+              className="flex items-center w-full mx-auto btn"
+            >
+              Submit
+            </button>
           </div>
         </Form>
       )}
